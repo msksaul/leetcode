@@ -1,14 +1,15 @@
 function maxProfit(prices: number[]): number {
-  let min_price = Infinity
+  let min_price = prices[0]
   let max_profit = 0
 
   for(const price of prices) {
     if(price<min_price) {
       min_price=price
+      continue
     }
     let profit = price-min_price
-    if(profit>max_profit) {
-      max_profit = profit
+    if(price-min_price>max_profit) {
+      max_profit = price-min_price
     }
   }
 
