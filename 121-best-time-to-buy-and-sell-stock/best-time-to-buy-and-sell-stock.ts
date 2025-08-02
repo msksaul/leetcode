@@ -7,7 +7,6 @@ function maxProfit(prices: number[]): number {
       min_price=price
       continue
     }
-    let profit = price-min_price
     if(price-min_price>max_profit) {
       max_profit = price-min_price
     }
