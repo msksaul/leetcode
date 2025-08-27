@@ -9,14 +9,11 @@ class MinStack {
     push(val: number): void {
       this.stack.push(val)
 
-      if(this.min.length==0) {
+      if(this.min.length==0 || this.min[this.min.length-1]>=val) {
         this.min.push(val)
-      }
-      else if(this.min[this.min.length-1]<val) {
-        this.min.push(this.min[this.min.length-1])
       }
       else {
-        this.min.push(val)
+        this.min.push(this.min[this.min.length-1])
       }
     }
 
