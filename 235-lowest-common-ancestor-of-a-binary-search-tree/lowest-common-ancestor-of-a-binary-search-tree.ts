@@ -16,7 +16,6 @@ function lowestCommonAncestor(root: TreeNode | null, p: TreeNode | null, q: Tree
   let lca = root
 
   const search = (node) => {
-    //if(!node) return
     lca = node
 
     if(node.val==p.val || node.val==q.val) {
