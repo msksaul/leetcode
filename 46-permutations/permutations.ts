@@ -5,6 +5,7 @@ function permute(nums: number[]): number[][] {
   const backtrack = () => {
     if(perm.length==nums.length) {
       ans.push([...perm])
+      return
     }
 
     for(const x of nums) {
