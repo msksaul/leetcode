@@ -1,6 +1,13 @@
 function fib(n: number): number {
-  if(n==0) return 0
-  if(n==1) return 1
+  const memo = {}
 
-  return fib(n-2)+fib(n-1)
+  const f = (x) => {
+    if(x==0) return 0
+    if(x==1) return 1
+    if(memo[x]) return memo[x]
+    memo[x] = f(x-2)+f(x-1)
+    return memo[x]
+  }
+
+  return f(n)
 };
