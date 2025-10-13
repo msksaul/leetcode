@@ -1,13 +1,15 @@
 function fib(n: number): number {
-  const memo = {}
+  if(n==0) return 0
+  if(n==1) return 1
 
-  const f = (x) => {
-    if(x==0) return 0
-    if(x==1) return 1
-    if(memo[x]) return memo[x]
-    memo[x] = f(x-2)+f(x-1)
-    return memo[x]
+  let prev=0
+  let curr=1
+
+  for(let i=2; i<=n; i++) {
+    let next = prev+curr
+    prev = curr
+    curr = next
   }
 
-  return f(n)
+  return curr
 };
