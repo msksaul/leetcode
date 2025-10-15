@@ -1,12 +1,14 @@
 function minCostClimbingStairs(cost: number[]): number {
-  let curr = 0
-  let prev = 0
+  const memo = new Map([[0,0], [1,0]])
 
-  for(let i=2; i<=cost.length; i++) {
-    let next = Math.min(cost[i-1]+curr, cost[i-2]+prev)
-    prev = curr
-    curr = next
+  const min_cost = (i) => {
+    if(memo.has(i)) return memo.get(i)
+
+    const val = Math.min(min_cost(i-1)+cost[i-1], min_cost(i-2)+cost[i-2])
+    memo.set(i, val)
+
+    return val
   }
 
-  return curr
+  return min_cost(cost.length)
 };
