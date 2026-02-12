@@ -1,21 +1,22 @@
 function mergeAlternately(word1: string, word2: string): string {
-  const A = word1.length, B = word2.length
-  let a = 0, b = 0
-  let s = []
+  const A = word1.length
+  const B = word2.length
+  let a = 0
+  let b = 0
+  let merged = []
 
   while(a<A && b<B) {
-    s.push(word1[a++])
-    s.push(word2[b++])
+    merged.push(word1[a++])
+    merged.push(word2[b++])
   }
 
   while(a<A) {
-    s.push(word1[a])
-    a++
-  }
-  while(b<B) {
-    s.push(word2[b])
-    b++
+    merged.push(word1[a++])
   }
 
-  return s.join('')
+  while(b<B) {
+    merged.push(word2[b++])
+  }
+
+  return merged.join('')
 };
