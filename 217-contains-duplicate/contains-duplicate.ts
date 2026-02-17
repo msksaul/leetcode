@@ -1,14 +1,12 @@
 function containsDuplicate(nums: number[]): boolean {
-  const set = new Set()
+  const hash = new Map()
 
   for(const num of nums) {
-    if(set.has(num)) {
-      return true
-    }
-    else {
-      set.add(num)
-    }
+      if(hash.has(num)) {
+          return true
+      }
+      hash.set(num, true)
   }
-  
+
   return false
 }
