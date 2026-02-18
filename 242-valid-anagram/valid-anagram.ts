@@ -1,13 +1,24 @@
 function isAnagram(s: string, t: string): boolean {
-  if(s.length !== t.length) return false
   
-  let sk = new Array(26).fill(0)
-  let tk = new Array(26).fill(0)
-  
-  for(let i=0; i<s.length; i++) {
-    sk[s[i].charCodeAt(0)-97]++
-    tk[t[i].charCodeAt(0)-97]++
+  if(s.length!=t.length) return false
+
+  const freq1 = new Map()
+  const freq2 = new Map()
+
+  for(const char of s) {
+      const prev = freq1.get(char) || 0
+      freq1.set(char, prev+1)
+
   }
-  
-  return sk.join('')===tk.join('')
+
+  for(const char of t) {
+      const prev = freq2.get(char) || 0
+      freq2.set(char, prev+1)
+  }
+
+  for(const [key, value] of freq1) {
+      if(freq2.get(key) != value) return false
+  }
+
+  return true
 };
