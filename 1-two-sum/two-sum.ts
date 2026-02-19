@@ -5,6 +5,8 @@ function twoSum(nums: number[], target: number): number[] {
     if(seen.has(target-nums[i])) {
       return [seen.get(target-nums[i]), i]
     }
-    seen.set(nums[i], i)
+    else {
+      seen.set(nums[i], i)
+    }
   }
 };
