@@ -1,21 +1,24 @@
 function groupAnagrams(strs: string[]): string[][] {
-  if(!strs.length) return [['']]
-  let group = {}
-  let tStrs = strs.map(w => {
-    let key = new Array(26).fill(0)
-    for(const l of w) {
-      key[l.charCodeAt(0)-97]++
+  const keys = new Map()
+
+  const gkey = (str) => {
+    let al = new Array(26).fill(0)
+    for(const c of str) {
+      al[c.charCodeAt(0)-97]++
     }
-    return [key.join('-'), w]
-  })
+    return al.join('/')
+  }
   
-  for(const [key, value] of tStrs) {
-    if(!group[key]) {
-      group[key] = [value]
-    }
-    else {
-      group[key].push(value)
+  for(const s of strs) {
+  const k = gkey(s)
+  if(!keys.has(k)) {
+    keys.set(k, [s])
+  }
+  else {
+    const prev = keys.get(k)
+    keys.set(k, [...prev,s])
     }
   }
-  return Object.values(group)
+
+  return [...keys.values()]   
 };
