@@ -3,8 +3,8 @@ function threeSum(nums: number[]): number[][] {
   let ans = []
 
   for(let i=0; i<nums.length; i++) {
-    if(nums[i]>0) {break}
-    else if(nums[i]==nums[i-1]) {continue}
+    if(nums[i]>0) break
+    if(nums[i]==nums[i-1]) continue
     let l = i+1
     let r = nums.length-1
 
