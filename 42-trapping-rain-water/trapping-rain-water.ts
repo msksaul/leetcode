@@ -1,22 +1,30 @@
 function trap(height: number[]): number {
-  let lw = 0
-  let rw = 0
-  let larr = []
-  let rarr = []
-  let sum = 0
+  let lH = 0
+  let rH = 0
+  let water = 0
+  let L = 0
+  let R = height.length-1
 
-  for(let i=0; i<height.length; i++) {
-    let j = height.length-i-1
-    larr[i] = lw
-    rarr[j] = rw
-    lw = Math.max(lw, height[i])
-    rw = Math.max(rw, height[j])
+  while(L<R) {
+    if(height[L]<height[R]) {
+      if(height[L]>=lH) {
+        lH = height[L]
+      }
+      else {
+        water+=lH-height[L]
+      }
+      L++
+    }
+    else {
+      if(height[R]>=rH) {
+        rH = height[R]
+      }
+      else {
+        water+=rH-height[R]
+      }
+      R--
+    }
   }
-
-  for(let i=0; i<larr.length; i++) {
-    let pw = Math.min(larr[i], rarr[i])
-    sum += Math.max(0, pw - height[i])
-  }
-
-  return sum
+    
+  return water
 };
