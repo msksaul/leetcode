@@ -1,21 +1,20 @@
 function isValid(s: string): boolean {
-  const pairs = {')':'(', '}':'{', ']':'['}
+  const pairs = {
+    ']': '[',
+    '}': '{',
+    ')': '('
+  }
+
   let stack = []
 
-  for(const b of s) {
-    if(!pairs[b]) {
-      stack.push(b)
+  for(let i=0; i<s.length; i++) {
+    if(stack.length>0 && stack[stack.length-1] == pairs[s[i]]) {
+      stack.pop()
     }
     else {
-      if(stack.length==0) {
-        return false
-      }
-      else {
-        let p = stack.pop()
-        if(pairs[b]!=p) return false
-      }
+      stack.push(s[i])
     }
   }
 
-  return stack.length==0
+  return stack.length == 0
 };
