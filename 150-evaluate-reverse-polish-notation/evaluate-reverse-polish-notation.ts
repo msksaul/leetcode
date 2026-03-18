@@ -1,31 +1,41 @@
 function evalRPN(tokens: string[]): number {
   let stack = []
-
-  for(const token of tokens) {
-    if(token==='+') {
-      let b = stack.pop()
-      let a = stack.pop()
-      stack.push(a+b)
-    }
-    else if(token==='-') {
-      let b = stack.pop()
-      let a = stack.pop()
-      stack.push(a-b)
-    }
-    else if(token==='*') {
-      let b = stack.pop()
-      let a = stack.pop()
-      stack.push(a*b)
-    }
-    else if(token==='/') {
-      let b = stack.pop()
-      let a = stack.pop()
-      stack.push(Math.trunc(a/b))
-    }
-    else {
-      stack.push(+token)
+     
+  const ops = {
+    '+': () => {
+      const res = Number(stack[stack.length-2]) + Number(stack[stack.length-1])
+      stack.pop()
+      stack.pop()
+      stack.push(res)
+    },
+    '-': () => {
+      const res = Number(stack[stack.length-2]) - Number(stack[stack.length-1])
+      stack.pop()
+      stack.pop()
+      stack.push(res)
+    },
+    '*': () => {
+      const res = Number(stack[stack.length-2]) * Number(stack[stack.length-1])
+      stack.pop()
+      stack.pop()
+      stack.push(res)
+    },
+    '/': () => {
+      const res = Math.trunc(Number(stack[stack.length-2]) / Number(stack[stack.length-1]))
+      stack.pop()
+      stack.pop()
+      stack.push(res)
     }
   }
-
-  return stack[0]
+     
+  for(const c of tokens) {
+    if(!ops[c]) {
+      stack.push(c)
+    }
+    else {
+      ops[c]()
+    }
+  }
+     
+  return +stack[0]
 };
