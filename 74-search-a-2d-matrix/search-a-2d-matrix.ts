@@ -1,25 +1,33 @@
 function searchMatrix(matrix: number[][], target: number): boolean {
-  let m = matrix.length
-  let n = matrix[0].length
-  let L = 0
-  let R = (m*n)-1
-
-  while(L<=R) {
-    const mid = L + Math.floor((R-L)/2)
-    const i = Math.floor(mid/n)
-    const j = mid%n
-    const mid_num = matrix[i][j]
-
-    if(target==mid_num) {
-      return true
+    const bs = (ar, tar) => {
+      let l = 0
+      let r = ar.length
+      
+      while(l <= r) {
+        const mid = l + Math.floor((r-l)/2)
+        
+        if(ar[mid] == tar) {
+          return true
+        }
+        else if(ar[mid] < tar) {
+          l = mid + 1
+        }
+        else {
+          r = mid -1
+        }
+      }
+      return false
     }
-    else if(target>mid_num) {
-      L = mid+1
+    
+    for(let i=0; i<matrix.length; i++) {
+      const len = matrix[i].length
+      
+      if(matrix[i][len-1] < target) {
+        continue
+      }
+      
+      return bs(matrix[i], target)
     }
-    else {
-      R = mid-1
-    }
-  }
-
-  return false
+    
+    return false
 };
